@@ -2,6 +2,7 @@ import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
+
 public class IconCellRenderer extends DefaultTableCellRenderer
 {
 

@@ -2,32 +2,46 @@
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 
 public class principal extends javax.swing.JFrame {
 DefaultTableModel modelo;
-Object imagenes[];
+TableColumn column1,column2,column3,column4,column5,column6;
+
+Object imagenes[]=new Object[2];
 ImageIcon img1,img2;
 
-    public principal() {
         
-                 tabla.setDefaultRenderer(Object.class,new IconCellRenderer());
-                imagenes=new Object[36];
+    public principal() {
+                initComponents();
+                
+                modelo=(DefaultTableModel)tabla.getModel();
                 img1=new ImageIcon(getClass().getResource("img1.png"));
                 img2=new ImageIcon(getClass().getResource("img2.png"));
+         
                 
-                for(int i=0;i<=imagenes.length-1;i++){
-                    imagenes[i]=new JLabel(img1);
+                imagenes[0]=new JLabel(img1);
+                imagenes[1]=new JLabel(img2);
+                
+                
+                
+                modelo.setNumRows(6);
+                modelo.setColumnCount(6);
+                
+                for(int i=0;i<6;i++){
+                    for(int j=0;j<6;j++){
+                    modelo.setValueAt(imagenes[0],i,j);
+                    }
                 }
                 
-                        
-                        
-                        modelo=(DefaultTableModel)tabla.getModel();
-                        modelo.addRow(imagenes);
-                        modelo.setNumRows(6);
-                        modelo.setColumnCount(6);
+           
+                 
+                
+                
+        tabla.setDefaultRenderer(Object.class,new IconCellRenderer());
         
-        initComponents();
+        
     }
 
     /** This method is called from within the constructor to
@@ -41,10 +55,26 @@ ImageIcon img1,img2;
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
+        Negro = new javax.swing.JButton();
+        blanco = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tabla.setModel(modelo);
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "null", "null", "null", "null", "null", "null"
+            }
+        ));
+        tabla.setAutoscrolls(false);
+        tabla.setRowMargin(0);
         tabla.setTableHeader(null);
         tabla.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -52,6 +82,31 @@ ImageIcon img1,img2;
             }
         });
         jScrollPane1.setViewportView(tabla);
+        tabla.getColumnModel().getColumn(0).setResizable(false);
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(10);
+        tabla.getColumnModel().getColumn(1).setResizable(false);
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(10);
+        tabla.getColumnModel().getColumn(2).setResizable(false);
+        tabla.getColumnModel().getColumn(2).setPreferredWidth(10);
+        tabla.getColumnModel().getColumn(3).setResizable(false);
+        tabla.getColumnModel().getColumn(3).setPreferredWidth(10);
+        tabla.getColumnModel().getColumn(4).setPreferredWidth(10);
+        tabla.getColumnModel().getColumn(5).setResizable(false);
+        tabla.getColumnModel().getColumn(5).setPreferredWidth(10);
+
+        Negro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1.png"))); // NOI18N
+        Negro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NegroActionPerformed(evt);
+            }
+        });
+
+        blanco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img2.png"))); // NOI18N
+        blanco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                blancoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -59,23 +114,57 @@ ImageIcon img1,img2;
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(blanco, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Negro, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(280, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(184, 184, 184))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Negro)
+                    .addComponent(blanco))
+                .addContainerGap(161, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
-
+                int numColumn=tabla.getSelectedColumn();
+                int numRow=tabla.getSelectedRow();
+                Object captura=modelo.getValueAt(numRow, numColumn);
+                if(captura==imagenes[0]){
+                 modelo.setValueAt(imagenes[1], numRow, numColumn);
+                }
+                else{
+                    modelo.setValueAt(imagenes[0], numRow, numColumn);
+                }
     }//GEN-LAST:event_tablaMouseClicked
+
+    private void blancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blancoActionPerformed
+        for(int i=0;i<6;i++){
+                    for(int j=0;j<6;j++){
+                    modelo.setValueAt(imagenes[1],i,j);
+                    }
+                }
+    }//GEN-LAST:event_blancoActionPerformed
+
+    private void NegroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NegroActionPerformed
+for(int i=0;i<6;i++){
+                    for(int j=0;j<6;j++){
+                    modelo.setValueAt(imagenes[0],i,j);
+                    }
+                }
+    }//GEN-LAST:event_NegroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -113,6 +202,8 @@ ImageIcon img1,img2;
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Negro;
+    private javax.swing.JButton blanco;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
